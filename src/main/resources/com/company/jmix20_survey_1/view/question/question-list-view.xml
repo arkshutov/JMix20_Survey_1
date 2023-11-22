@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://questionListView.title"
+      focusComponent="questionsDataGrid">
+    <data>
+        <collection id="questionsDc"
+                    class="com.company.jmix20_survey_1.entity.Question">
+            <fetchPlan extends="_base">
+                <property name="varAnswers" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="questionsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Question e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="questionsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="questionsDataGrid.create"/>
+            <button id="editBtn" action="questionsDataGrid.edit"/>
+            <button id="removeBtn" action="questionsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="questionsDl"/>
+        </hbox>
+        <dataGrid id="questionsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="questionsDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="questionName"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

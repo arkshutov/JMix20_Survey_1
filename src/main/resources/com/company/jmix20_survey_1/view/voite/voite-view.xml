@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://voiteView.title">
+    <layout>
+        <button id="buttonStart" text="Start voite!"/>
+        <vbox id="vboxLayout" visible="false">
+            <span id="spanQuestion">
+            </span>
+            <radioButtonGroup id="ratioAnswers"/>
+            <span id="spanResult"/>
+        </vbox>
+    </layout>
+</view>
